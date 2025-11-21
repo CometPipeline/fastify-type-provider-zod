@@ -132,12 +132,14 @@ export const jsonSchemaTransform: SwaggerTransform<Schema> = createJsonSchemaTra
 type CreateJsonSchemaTransformObjectOptions = {
   schemaRegistry?: $ZodRegistry<{ id?: string | undefined }>
   zodToJsonConfig?: ZodToJsonConfig
+  excludeInputSchemas?: boolean
 }
 
 export const createJsonSchemaTransformObject =
   ({
     schemaRegistry = globalRegistry,
     zodToJsonConfig = {},
+    excludeInputSchemas = true,
   }: CreateJsonSchemaTransformObjectOptions): SwaggerTransformObject =>
   (input) => {
     if ('swaggerObject' in input) {
@@ -146,7 +148,9 @@ export const createJsonSchemaTransformObject =
 
     const oasVersion = getOASVersion(input)
 
-    const inputSchemas = zodRegistryToJson(schemaRegistry, 'input', zodToJsonConfig)
+    const inputSchemas = excludeInputSchemas
+      ? zodRegistryToJson(schemaRegistry, 'input', zodToJsonConfig)
+      : {}
     const outputSchemas = zodRegistryToJson(schemaRegistry, 'output', zodToJsonConfig)
 
     for (const key in outputSchemas) {
