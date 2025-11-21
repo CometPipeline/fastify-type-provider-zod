@@ -167,6 +167,8 @@ export const zodRegistryToJson: (
     const jsonSchema = { ...result[id] }
 
     delete jsonSchema.id
+    delete jsonSchema.$id
+    delete jsonSchema.$schema
 
     jsonSchemas[getSchemaId(id, io)] = jsonSchema
   }
