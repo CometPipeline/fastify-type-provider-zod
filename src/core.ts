@@ -148,7 +148,7 @@ export const createJsonSchemaTransformObject =
 
     const oasVersion = getOASVersion(input)
 
-    const inputSchemas = excludeInputSchemas
+    const inputSchemas = !excludeInputSchemas
       ? zodRegistryToJson(schemaRegistry, 'input', zodToJsonConfig)
       : {}
     const outputSchemas = zodRegistryToJson(schemaRegistry, 'output', zodToJsonConfig)
