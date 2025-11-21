@@ -81,7 +81,7 @@ export const createJsonSchemaTransform = ({
         const jsonSchema = zodSchemaToJson(
           zodSchema,
           schemaRegistry,
-          'input',
+          'output',
           oasVersion,
           zodToJsonConfig,
         )
